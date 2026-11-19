@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NTN",
+    "TDT",
+    "NTN"
+  ],
+  "key": {
+    "N": "minecraft:netherite_scrap",
+    "T": "minecraft:iron_block",
+    "D": "minecraft:diamond_block"
+  },
+  "result": {
+    "id": "tuffsmp:titan_rune",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NTN",
+    "TDT",
+    "NTN"
+  ],
+  "key": {
+    "N": "minecraft:netherite_scrap",
+    "T": "minecraft:blaze_rod",
+    "D": "minecraft:diamond_block"
+  },
+  "result": {
+    "id": "tuffsmp:fury_rune",
+    "count": 1
+  }
+}

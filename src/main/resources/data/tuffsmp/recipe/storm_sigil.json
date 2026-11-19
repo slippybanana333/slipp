@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "MIM",
+    "IDI",
+    "MIM"
+  ],
+  "key": {
+    "M": "minecraft:lightning_rod",
+    "I": "minecraft:iron_ingot",
+    "D": "minecraft:diamond"
+  },
+  "result": {
+    "id": "tuffsmp:storm_sigil",
+    "count": 1
+  }
+}

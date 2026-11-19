@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"id": "tuffsmp",
+	"version": "${version}",
+	"name": "Tuff SMP",
+	"description": "Season 2: tiered bosses, boss essence and upgrades.",
+	"authors": ["Tuff SMP"],
+	"license": "CC0-1.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["com.tuffsmp.TuffSmp"],
+		"client": ["com.tuffsmp.client.TuffSmpClient"]
+	},
+	"accessWidener": "tuffsmp.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

@@ -1,0 +1,4 @@
+accessWidener v2 named
+
+# Lets us give bosses/minions an empty loot table (we hand out rewards ourselves).
+accessible field net/minecraft/world/entity/Mob lootTable Ljava/util/Optional;

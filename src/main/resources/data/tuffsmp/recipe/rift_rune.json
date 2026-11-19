@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NTN",
+    "TDT",
+    "NTN"
+  ],
+  "key": {
+    "N": "minecraft:netherite_scrap",
+    "T": "minecraft:ender_eye",
+    "D": "minecraft:diamond_block"
+  },
+  "result": {
+    "id": "tuffsmp:rift_rune",
+    "count": 1
+  }
+}

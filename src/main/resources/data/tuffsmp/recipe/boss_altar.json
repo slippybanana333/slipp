@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OCO",
+    "OEO",
+    "OOO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "C": "minecraft:crying_obsidian",
+    "E": "minecraft:enchanting_table"
+  },
+  "result": {
+    "id": "tuffsmp:boss_altar",
+    "count": 1
+  }
+}
