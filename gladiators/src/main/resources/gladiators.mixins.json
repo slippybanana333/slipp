@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "com.gladiators.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ServerExplosionMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}

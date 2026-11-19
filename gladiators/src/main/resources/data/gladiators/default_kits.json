@@ -1,0 +1,86 @@
+{
+  "_help": [
+    "Each kit is a list of items. Every item needs an 'id'. Optional: 'count' (default 1), 'slot', 'enchantments', 'components'.",
+    "slot: 'head' | 'chest' | 'legs' | 'feet' | 'offhand' | 0-35 (0-8 is the hotbar). Armor with no slot goes on automatically; anything else fills the next free slot in order.",
+    "enchantments: { \"minecraft:sharpness\": 2 }.  components: raw item components, e.g. { \"minecraft:unbreakable\": {} }.",
+    "Block items listed here are the only blocks players may place/break during an event. Run /gladiators reload after editing."
+  ],
+  "kits": {
+    "sword": {
+      "description": "Iron armor, iron sword, shield, golden apples, food",
+      "items": [
+        { "id": "minecraft:iron_helmet",     "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_chestplate", "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_leggings",   "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_boots",      "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_sword",      "enchantments": { "minecraft:sharpness": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:shield",          "slot": "offhand", "enchantments": { "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:golden_apple",    "count": 6 },
+        { "id": "minecraft:cooked_beef",     "count": 32 }
+      ]
+    },
+    "axe": {
+      "description": "Iron armor, iron axe, shield, golden apples, food",
+      "items": [
+        { "id": "minecraft:iron_helmet",     "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_chestplate", "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_leggings",   "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_boots",      "enchantments": { "minecraft:protection": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_axe",        "enchantments": { "minecraft:sharpness": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:shield",          "slot": "offhand", "enchantments": { "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:golden_apple",    "count": 6 },
+        { "id": "minecraft:cooked_beef",     "count": 32 }
+      ]
+    },
+    "diamond_smp": {
+      "description": "Enchanted diamond armor, diamond sword and axe, bow, shield, golden apples, ender pearls, food",
+      "items": [
+        { "id": "minecraft:diamond_helmet",     "enchantments": { "minecraft:protection": 4, "minecraft:unbreaking": 3, "minecraft:respiration": 3 } },
+        { "id": "minecraft:diamond_chestplate", "enchantments": { "minecraft:protection": 4, "minecraft:unbreaking": 3 } },
+        { "id": "minecraft:diamond_leggings",   "enchantments": { "minecraft:protection": 4, "minecraft:unbreaking": 3 } },
+        { "id": "minecraft:diamond_boots",      "enchantments": { "minecraft:protection": 4, "minecraft:unbreaking": 3, "minecraft:feather_falling": 4 } },
+        { "id": "minecraft:diamond_sword",      "enchantments": { "minecraft:sharpness": 4, "minecraft:unbreaking": 3, "minecraft:fire_aspect": 1 } },
+        { "id": "minecraft:diamond_axe",        "enchantments": { "minecraft:sharpness": 4, "minecraft:unbreaking": 3 } },
+        { "id": "minecraft:bow",                "enchantments": { "minecraft:power": 4, "minecraft:unbreaking": 3 } },
+        { "id": "minecraft:shield",             "slot": "offhand", "enchantments": { "minecraft:unbreaking": 3 } },
+        { "id": "minecraft:arrow",              "count": 64 },
+        { "id": "minecraft:golden_apple",       "count": 12 },
+        { "id": "minecraft:ender_pearl",        "count": 8 },
+        { "id": "minecraft:cooked_beef",        "count": 64 }
+      ]
+    },
+    "cart": {
+      "description": "Cart PvP: rails, minecarts, TNT minecarts, bow, flint and steel, blast-resistant armor, food",
+      "items": [
+        { "id": "minecraft:iron_helmet",     "enchantments": { "minecraft:blast_protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_chestplate", "enchantments": { "minecraft:blast_protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_leggings",   "enchantments": { "minecraft:blast_protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_boots",      "enchantments": { "minecraft:blast_protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:bow",             "enchantments": { "minecraft:power": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:flint_and_steel" },
+        { "id": "minecraft:tnt_minecart",    "count": 8 },
+        { "id": "minecraft:minecart",        "count": 4 },
+        { "id": "minecraft:rail",            "count": 64 },
+        { "id": "minecraft:powered_rail",    "count": 16 },
+        { "id": "minecraft:redstone_block",  "count": 8 },
+        { "id": "minecraft:arrow",           "count": 32 },
+        { "id": "minecraft:golden_apple",    "count": 6 },
+        { "id": "minecraft:cooked_beef",     "count": 32 }
+      ]
+    },
+    "spear_mace": {
+      "description": "Spear (new in 1.21.11) and mace, armor, wind charges, food",
+      "items": [
+        { "id": "minecraft:iron_helmet",     "enchantments": { "minecraft:protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_chestplate", "enchantments": { "minecraft:protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_leggings",   "enchantments": { "minecraft:protection": 3, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:iron_boots",      "enchantments": { "minecraft:protection": 3, "minecraft:unbreaking": 2, "minecraft:feather_falling": 4 } },
+        { "id": "minecraft:diamond_spear",   "enchantments": { "minecraft:lunge": 2, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:mace",            "enchantments": { "minecraft:density": 3, "minecraft:wind_burst": 1, "minecraft:unbreaking": 2 } },
+        { "id": "minecraft:wind_charge",     "count": 48 },
+        { "id": "minecraft:golden_apple",    "count": 6 },
+        { "id": "minecraft:cooked_beef",     "count": 32 }
+      ]
+    }
+  }
+}
