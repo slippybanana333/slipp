@@ -45,6 +45,7 @@ public final class AltarManager {
 		final BossDef def;
 		final ServerBossEvent bar;
 		final Set<Integer> reminded = new HashSet<>();
+		boolean building = false;
 
 		Pending(State.AltarRecord rec, BossDef def) {
 			this.rec = rec;
@@ -174,22 +175,31 @@ public final class AltarManager {
 			for (ServerPlayer pl : new ArrayList<>(p.bar.getPlayers())) if (!near.contains(pl)) p.bar.removePlayer(pl);
 			for (ServerPlayer pl : near) if (!p.bar.getPlayers().contains(pl)) p.bar.addPlayer(pl);
 
-			if (remaining <= 0 && loaded) {
-				Vec3 at = Vec3.atBottomCenterOf(pos.above());
-				var mob = BossManager.spawn(p.def, level, at, r.summonerName);
-				if (mob == null) continue; // try again next second
-				LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
-				if (bolt != null) {
-					bolt.snapTo(at.x, at.y, at.z);
-					bolt.setVisualOnly(true);
-					level.addFreshEntity(bolt);
-				}
-				Msg.broadcast(server, Msg.colored("⚔ " + p.def.name, p.def.color).copy()
-						.append(Msg.text(" has risen at " + r.x + ", " + r.y + ", " + r.z + " (" + dimensionName(r.dimension) + ")!", ChatFormatting.GOLD)));
-				p.bar.removeAllPlayers();
-				PENDING.remove(en.getKey());
-				State.INSTANCE.altars.remove(r);
-				State.INSTANCE.markDirty();
+			if (remaining <= 0 && loaded && !p.building) {
+				p.building = true;
+				// Build the arena first (spread over a few ticks), then the boss rises inside it.
+				com.tuffsmp.arena.Arena arena = new com.tuffsmp.arena.Arena(pos, com.tuffsmp.arena.Arena.RADIUS_TIER2);
+				final String pendingKey = en.getKey();
+				arena.build(level, () -> {
+					Vec3 at = Vec3.atBottomCenterOf(pos.above());
+					var mob = BossManager.spawn(p.def, level, at, r.summonerName, arena);
+					if (mob == null) {
+						p.building = false; // try again next second
+						return;
+					}
+					LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+					if (bolt != null) {
+						bolt.snapTo(at.x, at.y, at.z);
+						bolt.setVisualOnly(true);
+						level.addFreshEntity(bolt);
+					}
+					Msg.broadcast(server, Msg.colored("\u2694 " + p.def.name, p.def.color).copy()
+							.append(Msg.text(" has risen at " + r.x + ", " + r.y + ", " + r.z + " (" + dimensionName(r.dimension) + ")!", ChatFormatting.GOLD)));
+					p.bar.removeAllPlayers();
+					PENDING.remove(pendingKey);
+					State.INSTANCE.altars.remove(r);
+					State.INSTANCE.markDirty();
+				});
 			}
 		}
 	}

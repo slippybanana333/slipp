@@ -75,6 +75,8 @@ public class State {
 		public double homeX, homeY, homeZ;
 		public Map<String, Float> damage = new HashMap<>();
 		public String summonerName;
+		/** Arena (radius 0 = none). */
+		public int arenaX, arenaY, arenaZ, arenaRadius;
 	}
 
 	public static class WeeklyRecord {

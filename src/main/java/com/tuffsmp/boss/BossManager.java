@@ -66,6 +66,11 @@ public final class BossManager {
 	// -------------------------------------------------------------------------------------
 
 	public static Mob spawn(BossDef def, ServerLevel level, Vec3 pos, String summoner) {
+		return spawn(def, level, pos, summoner, null);
+	}
+
+	/** Spawns a boss, optionally bound to an (already built) arena. */
+	public static Mob spawn(BossDef def, ServerLevel level, Vec3 pos, String summoner, com.tuffsmp.arena.Arena arena) {
 		Mob mob = def.type.get().create(level, EntitySpawnReason.COMMAND);
 		if (mob == null) return null;
 		mob.snapTo(pos.x, pos.y, pos.z, level.getRandom().nextFloat() * 360f, 0f);
@@ -98,6 +103,7 @@ public final class BossManager {
 
 		ActiveBoss boss = new ActiveBoss(mob.getUUID(), def, level.dimension(), mob.position());
 		boss.summoner = summoner;
+		boss.arena = arena;
 		ACTIVE.put(mob.getUUID(), boss);
 
 		if (!level.addFreshEntity(mob)) {
@@ -199,7 +205,14 @@ public final class BossManager {
 				}
 			}
 		}
+		com.tuffsmp.arena.Arena arena = null;
+		for (State.BossRecord r : State.INSTANCE.bosses) {
+			if (entity.getUUID().toString().equals(r.uuid) && r.arenaRadius > 0) {
+				arena = new com.tuffsmp.arena.Arena(new net.minecraft.core.BlockPos(r.arenaX, r.arenaY, r.arenaZ), r.arenaRadius);
+			}
+		}
 		ActiveBoss boss = new ActiveBoss(entity.getUUID(), def, level.dimension(), home);
+		boss.arena = arena;
 		boss.damage.putAll(dmg);
 		boss.summoner = summoner;
 		boss.restorePhase(mob);
@@ -241,6 +254,14 @@ public final class BossManager {
 		if (b.def.tier == BossTier.THREE) WeeklyScheduler.onBossGone(server);
 	}
 
+	/** True if this block is inside the arena of a fight that is currently happening (building is disabled there). */
+	public static boolean buildingLocked(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos) {
+		for (ActiveBoss b : ACTIVE.values()) {
+			if (b.arena != null && b.dimension.equals(level.dimension()) && b.arena.containsBlock(pos)) return true;
+		}
+		return false;
+	}
+
 	// -------------------------------------------------------------------------------------
 	// Admin helpers & persistence
 	// -------------------------------------------------------------------------------------
@@ -263,6 +284,12 @@ public final class BossManager {
 			rec.homeY = b.home.y;
 			rec.homeZ = b.home.z;
 			rec.summonerName = b.summoner;
+			rec.arenaRadius = b.arena == null ? 0 : b.arena.radius;
+			if (b.arena != null) {
+				rec.arenaX = b.arena.center.getX();
+				rec.arenaY = b.arena.center.getY();
+				rec.arenaZ = b.arena.center.getZ();
+			}
 			rec.damage.clear();
 			for (var e : b.damage.entrySet()) rec.damage.put(e.getKey().toString(), e.getValue());
 		}

@@ -44,7 +44,9 @@ public final class TuffCommands {
 				.then(Commands.literal("spawn")
 						.then(Commands.argument("id", StringArgumentType.word())
 								.suggests((c, b) -> SharedSuggestionProvider.suggest(BossRegistry.all().stream().map(x -> x.id), b))
-								.executes(c -> spawnBoss(c.getSource(), StringArgumentType.getString(c, "id")))))
+								.executes(c -> spawnBoss(c.getSource(), StringArgumentType.getString(c, "id"), false))
+								.then(Commands.literal("arena")
+										.executes(c -> spawnBoss(c.getSource(), StringArgumentType.getString(c, "id"), true)))))
 				.then(Commands.literal("list").executes(c -> listBosses(c.getSource())))
 				.then(Commands.literal("killall").executes(c -> {
 					int n = BossManager.killAll(c.getSource().getServer());
@@ -172,10 +174,18 @@ public final class TuffCommands {
 				})));
 	}
 
-	private static int spawnBoss(CommandSourceStack src, String id) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+	private static int spawnBoss(CommandSourceStack src, String id, boolean withArena) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
 		BossDef def = BossRegistry.get(id);
 		if (def == null) throw NOT_FOUND.create();
 		var level = src.getLevel();
+		int radius = com.tuffsmp.arena.Arena.radiusFor(def.tier);
+		if (withArena && radius > 0) {
+			// Admin: build the arena here first, then spawn in it (destructive: replaces terrain in the circle).
+			var arena = new com.tuffsmp.arena.Arena(net.minecraft.core.BlockPos.containing(src.getPosition()), radius);
+			src.sendSuccess(() -> Msg.text("Building a radius-" + radius + " arena, then spawning " + def.name + "...", ChatFormatting.YELLOW), true);
+			arena.build(level, () -> BossManager.spawn(def, level, src.getPosition(), src.getTextName(), arena));
+			return 1;
+		}
 		Mob m = BossManager.spawn(def, level, src.getPosition(), src.getTextName());
 		if (m == null) {
 			src.sendFailure(Component.literal("Could not spawn " + def.name + "."));

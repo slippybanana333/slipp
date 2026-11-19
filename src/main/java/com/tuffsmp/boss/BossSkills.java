@@ -222,6 +222,7 @@ final class BossSkills {
 		Vec3 flat = new Vec3(look.x, 0, look.z);
 		flat = flat.lengthSqr() < 1.0E-4 ? new Vec3(1, 0, 0) : flat.normalize();
 		Vec3 dest = target.position().subtract(flat.scale(2.5 + mob.getBbWidth() * 0.5));
+		if (b.arena != null && !b.arena.containsXZ(dest.x, dest.z)) return;
 		var box = mob.getBoundingBox().move(dest.subtract(mob.position()));
 		if (!level.noCollision(mob, box)) return;
 		BossFx.burst(level, mob.position(), ParticleTypes.PORTAL, 40, 0.8);

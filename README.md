@@ -72,6 +72,21 @@ models are needed**. At 66% and 33% health they enrage (more damage, faster cast
 Skills: Slam, Volley, Minions, Leap, Frost Nova, Lightning, Pull, Teleport, Darkness, Wither Blast. All are telegraphed
 (particles + action-bar warning) before they land. Projectiles/lightning are scripted so **they never set fires or break blocks**.
 
+## Arenas (Tier 2 and Tier 3)
+
+When a Tier 2 altar boss rises, or the weekly boss spawns, a **coded arena** is built first and the boss appears inside it:
+a flat circular stone-brick platform (polished-blackstone rim), a 2-block wall, terrain cleared above it, and gaps under it filled.
+Radius is **24** for Tier 2 (centered on the altar) and **40** for Tier 3 (centered on the weekly location). Tier 1 fights have no arena.
+
+* The boss **never leaves** the arena (it's pulled back inside, and its teleport skill won't land outside).
+* **Digging and placing blocks is disabled** inside the arena while the boss is alive (creative mode is exempt).
+* **Abandoned fight** (everyone gone or dead for 2 minutes): the boss heals to full and stays, and the arena is rebuilt to its original layout.
+* **Won fight:** the arena stays exactly as it is.
+* Chests and other block-entity blocks inside the circle are left alone, but everything else in the circle is replaced, so place altars and the weekly location away from builds.
+
+All numbers (radii, height, wall, materials) are constants at the top of `arena/Arena.java`.
+`/tuff boss spawn <id> arena` builds an arena at your feet and spawns a Tier 2/3 boss in it (destructive).
+
 ## Crafting (survival)
 
 * **Sigil** (Tier 1): `M I M / I D I / M I M` — M = thematic block (moss, magma, packed ice, lightning rod, prismarine, gold), I = iron ingot, D = diamond.

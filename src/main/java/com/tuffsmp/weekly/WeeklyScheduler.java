@@ -154,29 +154,38 @@ public final class WeeklyScheduler {
 		State.INSTANCE.markDirty();
 	}
 
-	/** Spawns the weekly boss immediately (also used by /tuff weekly spawnnow). */
+	/**
+	 * Builds the arena at the weekly location, then spawns the weekly boss in it (also used by
+	 * /tuff weekly spawnnow). Returns false only if the spawn could not even be started.
+	 */
 	public static boolean spawnNow(MinecraftServer server, BossDef override) {
 		BossDef def = override != null ? override : upcomingBoss();
 		ServerLevel level = State.INSTANCE.weekly.hasLocation ? level(server) : server.overworld();
 		Vec3 at = locationFor(server);
 		BlockPos bp = BlockPos.containing(at);
 		level.getChunk(bp.getX() >> 4, bp.getZ() >> 4); // make sure the chunk is loaded
-		Mob mob = BossManager.spawn(def, level, at, "the weekly summons");
-		if (mob == null) return false;
-		State.INSTANCE.weekly.activeBossUuid = mob.getUUID().toString();
-		LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
-		if (bolt != null) {
-			bolt.snapTo(at.x, at.y, at.z);
-			bolt.setVisualOnly(true);
-			level.addFreshEntity(bolt);
-		}
-		Msg.broadcast(server, Msg.text("☠ THE WEEKLY BOSS HAS RISEN: ", ChatFormatting.DARK_RED, ChatFormatting.BOLD)
-				.append(Msg.colored(def.name, def.color))
-				.append(Msg.text(" at " + bp.getX() + ", " + bp.getY() + ", " + bp.getZ()
-						+ " (" + AltarManager.dimensionName(level.dimension().identifier().toString()) + ")!", ChatFormatting.RED)));
-		for (ServerPlayer p : server.getPlayerList().getPlayers()) {
-			Msg.ping(p, SoundEvents.WITHER_SPAWN, 1.0f, 0.6f);
-		}
+		com.tuffsmp.arena.Arena arena = new com.tuffsmp.arena.Arena(bp, com.tuffsmp.arena.Arena.RADIUS_TIER3);
+		arena.build(level, () -> {
+			Mob mob = BossManager.spawn(def, level, at, "the weekly summons", arena);
+			if (mob == null) {
+				Msg.broadcast(server, Msg.text("The weekly boss failed to spawn \u2014 an admin can use /tuff weekly spawnnow.", ChatFormatting.GRAY));
+				return;
+			}
+			State.INSTANCE.weekly.activeBossUuid = mob.getUUID().toString();
+			LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+			if (bolt != null) {
+				bolt.snapTo(at.x, at.y, at.z);
+				bolt.setVisualOnly(true);
+				level.addFreshEntity(bolt);
+			}
+			Msg.broadcast(server, Msg.text("\u2620 THE WEEKLY BOSS HAS RISEN: ", ChatFormatting.DARK_RED, ChatFormatting.BOLD)
+					.append(Msg.colored(def.name, def.color))
+					.append(Msg.text(" at " + bp.getX() + ", " + bp.getY() + ", " + bp.getZ()
+							+ " (" + AltarManager.dimensionName(level.dimension().identifier().toString()) + ")!", ChatFormatting.RED)));
+			for (ServerPlayer p : server.getPlayerList().getPlayers()) {
+				Msg.ping(p, SoundEvents.WITHER_SPAWN, 1.0f, 0.6f);
+			}
+		});
 		return true;
 	}
 

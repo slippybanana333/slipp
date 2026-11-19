@@ -77,6 +77,28 @@ public class TuffSmp implements ModInitializer {
 		ServerLivingEntityEvents.AFTER_DAMAGE.register(BossManager::onAfterDamage);
 		ServerLivingEntityEvents.AFTER_DEATH.register(BossManager::onDeath);
 
+		// No building or digging inside an arena while its boss fight is on.
+		net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.BEFORE.register((level, player, pos, state, be) -> {
+			if (player.isCreative() || !BossManager.buildingLocked(level, pos)) return true;
+			com.tuffsmp.util.Msg.actionbar((net.minecraft.server.level.ServerPlayer) player,
+					com.tuffsmp.util.Msg.text("You can't dig during a boss fight.", net.minecraft.ChatFormatting.RED));
+			return false;
+		});
+		net.fabricmc.fabric.api.event.player.UseBlockCallback.EVENT.register((player, level, hand, hit) -> {
+			var held = player.getItemInHand(hand).getItem();
+			boolean placing = held instanceof net.minecraft.world.item.BlockItem || held instanceof net.minecraft.world.item.BucketItem
+					|| held == net.minecraft.world.item.Items.FLINT_AND_STEEL || held == net.minecraft.world.item.Items.FIRE_CHARGE;
+			if (!placing || player.isCreative()) return net.minecraft.world.InteractionResult.PASS;
+			var target = hit.getBlockPos().relative(hit.getDirection());
+			if (BossManager.buildingLocked(level, hit.getBlockPos()) || BossManager.buildingLocked(level, target)) {
+				if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+					com.tuffsmp.util.Msg.actionbar(sp, com.tuffsmp.util.Msg.text("You can't build during a boss fight.", net.minecraft.ChatFormatting.RED));
+				}
+				return net.minecraft.world.InteractionResult.FAIL;
+			}
+			return net.minecraft.world.InteractionResult.PASS;
+		});
+
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> BossRewards.deliverPending(handler.getPlayer()));
 	}
 }

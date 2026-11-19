@@ -37,6 +37,8 @@ public final class ActiveBoss {
 	public final Set<UUID> minions = new HashSet<>();
 	public final ServerBossEvent bar;
 	public String summoner;
+	/** Tier 2/3 fight area; null for Tier 1. */
+	public com.tuffsmp.arena.Arena arena;
 
 	public int phase = 1;
 	public boolean dead = false;
@@ -279,8 +281,17 @@ public final class ActiveBoss {
 	private void leash(ServerLevel level, Mob mob) {
 		boolean anyone = !BossFx.players(level, mob.position(), 64).isEmpty();
 		idleTicks = anyone ? 0 : idleTicks + 20;
-		double max = def.tier.leashRadius;
-		if (mob.position().distanceToSqr(home) > max * max) {
+		boolean outside;
+		if (arena != null) {
+			// The boss never leaves its arena.
+			double dx = mob.getX() - (arena.center.getX() + 0.5), dz = mob.getZ() - (arena.center.getZ() + 0.5);
+			double max = arena.radius - 1.5;
+			outside = dx * dx + dz * dz > max * max;
+		} else {
+			double max = def.tier.leashRadius;
+			outside = mob.position().distanceToSqr(home) > max * max;
+		}
+		if (outside) {
 			mob.teleportTo(home.x, home.y, home.z);
 			mob.setTarget(null);
 			mob.heal(mob.getMaxHealth() * 0.1f);
@@ -294,6 +305,8 @@ public final class ActiveBoss {
 			phase = 1;
 			applyPhaseModifiers(mob);
 			idleTicks = 0;
+			// Abandoned fight: put the arena back to how it was built, and the boss stays.
+			if (arena != null) arena.build(level, () -> {});
 		}
 	}
 
