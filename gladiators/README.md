@@ -102,9 +102,9 @@ Farm animals standing inside the footprint will suffocate when it is built.
   else fills the next free slot in the order written.
 - Kit names must be lowercase letters, digits and `_`.
 - Run `/gladiators reload`. Unknown item or enchantment ids are skipped and listed in chat and in the log.
-- Block items in kits are the only blocks players may place and break during an event.
+- Block items in kits are the only blocks players may place and break during an event. Kits with buckets (water) are fine: leftover water and lava in the arena is swept away when the event ends.
 
-Default kits: `sword`, `axe`, `diamond_smp`, `cart`, `spear_mace`. In 1.21.11 spears are `<material>_spear` (for example
+Default kits: `sword`, `axe`, `diamond_smp`, `cart`, `spear_mace`, `netherite`, `diamond_basic`, `diamond_utility`, `diamond_ranged`, `netherite_cart`. In 1.21.11 spears are `<material>_spear` (for example
 `minecraft:diamond_spear`) and their enchantment is `minecraft:lunge`.
 
 ## Config (`config/gladiators/config.json`)

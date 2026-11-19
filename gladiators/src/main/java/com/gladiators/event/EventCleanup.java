@@ -19,6 +19,7 @@ import net.minecraft.world.phys.AABB;
 final class EventCleanup {
 	void run(ServerLevel level, GladiatorsEvent event) {
 		removePlacedBlocks(level, event);
+		removeFluids(level, event.arena);
 		removeEntities(level, event.arena);
 	}
 
@@ -31,6 +32,29 @@ final class EventCleanup {
 			}
 		}
 		event.placedBlocks.clear();
+	}
+
+	/** Water and lava spread, so instead of tracking each block, sweep the lower arena volume for fluids. */
+	private void removeFluids(ServerLevel level, ArenaData arena) {
+		if (!GladiatorsMod.kits().usesFluids()) {
+			return;
+		}
+		int reach = (int) Math.ceil(arena.outerRadius);
+		int topY = Math.min(arena.ceilingY - 1, arena.floorY + 24);
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+		for (int dx = -reach; dx <= reach; dx++) {
+			for (int dz = -reach; dz <= reach; dz++) {
+				if (dx * dx + dz * dz > arena.outerRadius * arena.outerRadius) {
+					continue;
+				}
+				for (int y = arena.floorY + 1; y <= topY; y++) {
+					pos.set(arena.centerX + dx, y, arena.centerZ + dz);
+					if (!level.getFluidState(pos).isEmpty()) {
+						level.setBlock(pos, Blocks.AIR.defaultBlockState(), ArenaBuilder.FLAGS);
+					}
+				}
+			}
+		}
 	}
 
 	private void removeEntities(ServerLevel level, ArenaData arena) {

@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
@@ -34,6 +35,7 @@ public final class KitManager {
 	private Map<String, KitDefinition> kits = new LinkedHashMap<>();
 	private Set<Item> kitItems = Set.of();
 	private Set<Block> kitBlocks = Set.of();
+	private boolean usesFluids;
 
 	public KitManager(Path configDir) {
 		this.file = configDir.resolve("kits.json");
@@ -88,20 +90,30 @@ public final class KitManager {
 		return kitBlocks;
 	}
 
+	/** True if any kit contains a bucket, so the arena is swept for leftover water/lava after an event. */
+	public boolean usesFluids() {
+		return usesFluids;
+	}
+
 	private void indexItems() {
+		boolean fluids = false;
 		Set<Item> items = new HashSet<>();
 		Set<Block> blocks = new HashSet<>();
 		for (KitDefinition kit : kits.values()) {
 			for (KitDefinition.Item entry : kit.items) {
 				Identifier id = entry.id == null ? null : Identifier.tryParse(entry.id);
-				BuiltInRegistries.ITEM.getOptional(id).ifPresent(item -> {
+				var found = BuiltInRegistries.ITEM.getOptional(id);
+				if (found.isPresent()) {
+					Item item = found.get();
 					items.add(item);
 					if (item instanceof BlockItem blockItem) {
 						blocks.add(blockItem.getBlock());
 					}
-				});
+					fluids |= item instanceof BucketItem;
+				}
 			}
 		}
+		usesFluids = fluids;
 		kitItems = Collections.unmodifiableSet(items);
 		kitBlocks = Collections.unmodifiableSet(blocks);
 	}
