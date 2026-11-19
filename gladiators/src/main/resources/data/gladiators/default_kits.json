@@ -13,21 +13,21 @@
         { "id": "minecraft:iron_chestplate", "enchantments": { "minecraft:protection": 3 } },
         { "id": "minecraft:iron_leggings", "enchantments": { "minecraft:protection": 3 } },
         { "id": "minecraft:iron_boots", "enchantments": { "minecraft:protection": 3 } },
-        { "id": "minecraft:iron_sword", "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:iron_sword", "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:shield", "slot": "offhand", "enchantments": { "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:golden_apple", "count": 6 },
         { "id": "minecraft:cooked_beef", "count": 32 }
       ]
     },
     "axe": {
-      "description": "Iron armor, iron axe, shield, golden apples, food",
+      "description": "Plain iron armor, iron axe, shield, golden apples, food (no enchantments)",
       "items": [
         { "id": "minecraft:iron_helmet" },
         { "id": "minecraft:iron_chestplate" },
         { "id": "minecraft:iron_leggings" },
         { "id": "minecraft:iron_boots" },
-        { "id": "minecraft:iron_axe", "enchantments": { "minecraft:sharpness": 5, "minecraft:efficiency": 5, "minecraft:fortune": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
-        { "id": "minecraft:shield", "slot": "offhand", "enchantments": { "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:iron_axe" },
+        { "id": "minecraft:shield", "slot": "offhand" },
         { "id": "minecraft:golden_apple", "count": 6 },
         { "id": "minecraft:cooked_beef", "count": 32 }
       ]
@@ -39,7 +39,7 @@
         { "id": "minecraft:diamond_chestplate", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:diamond_leggings", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:diamond_boots", "enchantments": { "minecraft:protection": 4 } },
-        { "id": "minecraft:diamond_sword", "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:diamond_sword", "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:diamond_axe", "enchantments": { "minecraft:sharpness": 5, "minecraft:efficiency": 5, "minecraft:fortune": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:bow", "enchantments": { "minecraft:power": 5, "minecraft:punch": 2, "minecraft:flame": 1, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:shield", "slot": "offhand", "enchantments": { "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
@@ -75,7 +75,7 @@
         { "id": "minecraft:iron_chestplate", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:iron_leggings", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:iron_boots", "enchantments": { "minecraft:protection": 4 } },
-        { "id": "minecraft:diamond_spear", "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:looting": 3, "minecraft:lunge": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:diamond_spear", "enchantments": { "minecraft:sharpness": 5, "minecraft:looting": 3, "minecraft:lunge": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:mace", "enchantments": { "minecraft:density": 5, "minecraft:wind_burst": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:wind_charge", "count": 48 },
         { "id": "minecraft:golden_apple", "count": 6 },
@@ -90,14 +90,14 @@
         { "id": "minecraft:netherite_leggings", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:netherite_boots", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:totem_of_undying", "slot": "offhand" },
-        { "id": "minecraft:netherite_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:netherite_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:golden_apple", "slot": 1, "count": 64 },
         { "id": "minecraft:netherite_axe", "slot": 2, "enchantments": { "minecraft:sharpness": 5, "minecraft:efficiency": 5, "minecraft:fortune": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:ender_pearl", "slot": 3, "count": 16 },
         { "id": "minecraft:wind_charge", "slot": 4, "count": 64 },
         { "id": "minecraft:splash_potion", "slot": 5, "components": { "minecraft:potion_contents": {"potion": "minecraft:strong_strength"} } },
         { "id": "minecraft:mace", "slot": 6, "enchantments": { "minecraft:density": 5, "minecraft:wind_burst": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
-        { "id": "minecraft:netherite_spear", "slot": 7, "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:looting": 3, "minecraft:lunge": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:netherite_spear", "slot": 7, "enchantments": { "minecraft:sharpness": 5, "minecraft:looting": 3, "minecraft:lunge": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:shield", "slot": 8, "enchantments": { "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:wind_charge", "slot": 9, "count": 64 },
         { "id": "minecraft:wind_charge", "slot": 10, "count": 64 },
@@ -135,7 +135,7 @@
         { "id": "minecraft:diamond_chestplate", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:diamond_leggings", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:diamond_boots", "enchantments": { "minecraft:protection": 4 } },
-        { "id": "minecraft:diamond_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } }
+        { "id": "minecraft:diamond_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } }
       ]
     },
     "diamond_utility": {
@@ -146,7 +146,7 @@
         { "id": "minecraft:diamond_leggings", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:diamond_boots", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:shield", "slot": "offhand", "enchantments": { "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
-        { "id": "minecraft:diamond_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:diamond_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:golden_apple", "slot": 1, "count": 64 },
         { "id": "minecraft:diamond_axe", "slot": 2, "enchantments": { "minecraft:sharpness": 5, "minecraft:efficiency": 5, "minecraft:fortune": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:ender_pearl", "slot": 3, "count": 16 },
@@ -190,7 +190,7 @@
         { "id": "minecraft:diamond_boots", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:shield", "slot": "offhand", "enchantments": { "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:diamond_axe", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:efficiency": 5, "minecraft:fortune": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
-        { "id": "minecraft:diamond_sword", "slot": 1, "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:diamond_sword", "slot": 1, "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:crossbow", "slot": 2, "enchantments": { "minecraft:quick_charge": 3, "minecraft:piercing": 4, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:bow", "slot": 3, "enchantments": { "minecraft:power": 5, "minecraft:punch": 2, "minecraft:flame": 1, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:arrow", "slot": 8, "count": 5 }
@@ -204,7 +204,7 @@
         { "id": "minecraft:netherite_leggings", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:netherite_boots", "enchantments": { "minecraft:protection": 4 } },
         { "id": "minecraft:totem_of_undying", "slot": "offhand" },
-        { "id": "minecraft:netherite_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:knockback": 2, "minecraft:fire_aspect": 2, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
+        { "id": "minecraft:netherite_sword", "slot": 0, "enchantments": { "minecraft:sharpness": 5, "minecraft:sweeping_edge": 3, "minecraft:looting": 3, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
         { "id": "minecraft:oak_log", "slot": 1, "count": 64 },
         { "id": "minecraft:tnt_minecart", "slot": 2 },
         { "id": "minecraft:bow", "slot": 3, "enchantments": { "minecraft:power": 5, "minecraft:punch": 2, "minecraft:flame": 1, "minecraft:unbreaking": 3, "minecraft:mending": 1 } },
