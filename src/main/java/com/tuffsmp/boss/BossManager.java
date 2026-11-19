@@ -230,11 +230,22 @@ public final class BossManager {
 		ActiveBoss b = ACTIVE.get(entity.getUUID());
 		if (b == null || taken <= 0) return;
 		if (source.getEntity() instanceof ServerPlayer sp) b.addDamage(sp, taken);
+		b.lastHealth = entity.getHealth();
 		// Co-op scaling: the more players are fighting, the more of each hit the boss shrugs off.
 		double mult = b.coopMult;
 		if (mult > 1.0 && entity.getHealth() > 0) {
 			entity.heal((float) (taken * (1.0 - 1.0 / mult)));
 		}
+	}
+
+	/** The killing blow doesn't fire AFTER_DAMAGE, so credit it here (only the health it actually removed, not overkill). */
+	public static boolean allowDeath(LivingEntity entity, DamageSource source, float amount) {
+		ActiveBoss b = ACTIVE.get(entity.getUUID());
+		if (b != null && source.getEntity() instanceof ServerPlayer sp) {
+			float dealt = Math.min(amount, Math.max(b.lastHealth, 0f));
+			if (dealt > 0) b.addDamage(sp, dealt);
+		}
+		return true;
 	}
 
 	public static void onDeath(LivingEntity entity, DamageSource source) {

@@ -75,6 +75,7 @@ public class TuffSmp implements ModInitializer {
 		ServerEntityEvents.ENTITY_LOAD.register(BossManager::onEntityLoad);
 		ServerLivingEntityEvents.ALLOW_DAMAGE.register(BossManager::allowDamage);
 		ServerLivingEntityEvents.AFTER_DAMAGE.register(BossManager::onAfterDamage);
+		ServerLivingEntityEvents.ALLOW_DEATH.register(BossManager::allowDeath);
 		ServerLivingEntityEvents.AFTER_DEATH.register(BossManager::onDeath);
 
 		// No building or digging inside an arena while its boss fight is on.

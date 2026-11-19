@@ -44,6 +44,8 @@ public final class ActiveBoss {
 	public boolean dead = false;
 	/** Effective-health multiplier from nearby players (damage taken is partly healed back). */
 	public volatile double coopMult = 1.0;
+	/** Health as of the last tick/hit, so a killing blow can be credited for the health it actually removed. */
+	public float lastHealth;
 
 	private int age = 0;
 	private int skillCooldown;
@@ -137,6 +139,7 @@ public final class ActiveBoss {
 		if (!mob.isAlive()) return true; // death handled by the death event
 		bar.setVisible(true);
 		lastPos = mob.position();
+		lastHealth = mob.getHealth();
 		age++;
 
 		if (mob.isOnFire()) mob.clearFire();
